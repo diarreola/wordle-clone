@@ -1,7 +1,9 @@
 const tileDisplay = document.querySelector('.tile-container')
 const keyboard = document.querySelector('.keyboard-container')
 const wordle = 'super'
-const TILE_LENGTH = 4
+const TILE_LENGTH = 5
+const ROW_LENGTH = 6
+
 const keys = [
   'Q',
   'W',
@@ -90,10 +92,9 @@ function handleClick(e) {
     return
   }
   if (e.target.textContent === '«') {
-    deleteKey()
+    deleteLetter()
     return
   }
-  console.log("e", e)
   addLetter(e.target.textContent)
 }
 
@@ -104,7 +105,7 @@ function handleKeyPress(e) {
     return
   }
   if (e.key === 'Delete' || e.key === 'Backspace') {
-    deleteKey()
+    deleteLetter()
     return
   }
   if (e.key.match(/^[a-z]$/)) {
@@ -118,22 +119,22 @@ function submitGuess() {
   return
 }
 
-function deleteKey() {
-  console.log('delete')
-  return
+function deleteLetter() {
+  if (currentTile > 0) {
+    currentTile--
+    const tile = document.getElementById('guessRow-' + currentRow + '-tile-' + currentTile)
+    tile.textContent = ''
+    guessRows[currentRow][currentTile] = ''
+    tile.setAttribute('data', '')
+  }
 }
 
 function addLetter(letter) {
-  const tile = document.getElementById('guessRow-' + currentRow + '-tile-' + currentTile)
-  tile.textContent = letter.toLowerCase()
-  guessRows[currentRow][currentTile]
-  tile.setAttribute('data', letter)
-
-  // if (currentTile >= TILE_LENGTH) {
-  //   currentRow++
-  //   currentTile = 0
-  //   return
-  // }
-  // check if
-  currentTile++
+  if (currentTile < TILE_LENGTH && currentRow < ROW_LENGTH) {
+    const tile = document.getElementById('guessRow-' + currentRow + '-tile-' + currentTile)
+    tile.textContent = letter.toLowerCase()
+    guessRows[currentRow][currentTile] = letter
+    tile.setAttribute('data', letter)
+    currentTile++
+  }
 }
