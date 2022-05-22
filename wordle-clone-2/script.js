@@ -62,16 +62,21 @@ function handleClick(e) {
     deleteKey()
     return
   }
-  console.log('clicked')
+  pressKey(e.target.key)
 }
 
 function handleKeyPress(e) {
-  if (e.key === 'ENTER') {
+  console.log('key:', e.key)
+  if (e.key === 'Enter') {
     submitGuess()
     return
   }
-  if (e.key === '«') {
+  if (e.key === 'Delete' || e.key === 'Backspace') {
     deleteKey()
+    return
+  }
+  if (e.key.match(/^[a-z]$/)) {
+    pressKey(e.key)
     return
   }
 }
