@@ -1,7 +1,5 @@
 const tileDisplay = document.querySelector('.tile-container')
 const keyboard = document.querySelector('.keyboard-container')
-
-// create keyboard
 const keys = [
   'Q',
   'W',
@@ -33,24 +31,53 @@ const keys = [
   '«',
 ]
 
-keys.forEach(key => {
-  const buttonElement = document.createElement('button')
-  buttonElement.textContent = key
-  buttonElement.setAttribute('id', key)
-  buttonElement.addEventListener('click', handleClick)
-  document.addEventListener('keydown', handleKeyPress)
-  keyboard.append(buttonElement)
-})
+const guessRows = [
+  ['', '', '', '', ''],
+  ['', '', '', '', ''],
+  ['', '', '', '', ''],
+  ['', '', '', '', ''],
+  ['', '', '', '', ''],
+  ['', '', '', '', '']
+]
 
-// startInteraction()
-// function startInteraction() {
-//   document.addEventListener('click', handleClick)
-//   document.addEventListener('keydown', handleKeyPress)
-// }
+startGame()
+
+function startGame () {
+  buildKeyboard()
+  buildTiles()
+  document.addEventListener('keydown', handleKeyPress)
+}
 
 function stopGame() {
+  document.removeEventListener("keydown", handleKeyPress)
+  const keyboardButtons = keyboard.querySelectorAll("button")
+  keyboardButtons.forEach(keyboardButton => {
+    keyboardButton.removeEventListener('click', handleClick)
+  })
+}
 
+function buildKeyboard() {
+  keys.forEach(key => {
+    const buttonElement = document.createElement('button')
+    buttonElement.textContent = key
+    buttonElement.setAttribute('id', key)
+    buttonElement.addEventListener('click', handleClick)
+    keyboard.append(buttonElement)
+  })
+}
 
+function buildTiles() {
+  guessRows.forEach((guessRow, guessRowIndex) => {
+    const rowElement = document.createElement('div')
+    rowElement.setAttribute('id', 'guessRow-' + guessRowIndex)
+    guessRow.forEach((_guess, guessIndex) => {
+        const tileElement = document.createElement('div')
+        tileElement.setAttribute('id', 'guessRow-' + guessRowIndex + '-tile-' + guessIndex)
+        tileElement.classList.add('tile')
+        rowElement.append(tileElement)
+    })
+    tileDisplay.append(rowElement)
+  })
 }
 
 function handleClick(e) {
@@ -85,8 +112,12 @@ function submitGuess() {
   console.log('enter')
   return
 }
+
 function deleteKey() {
   console.log('delete')
   return
 }
-// keyboard interaction + onclick interaction
+
+function pressKey() {
+
+}
