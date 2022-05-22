@@ -1,5 +1,7 @@
 const tileDisplay = document.querySelector('.tile-container')
 const keyboard = document.querySelector('.keyboard-container')
+const wordle = 'super'
+const TILE_LENGTH = 4
 const keys = [
   'Q',
   'W',
@@ -39,6 +41,8 @@ const guessRows = [
   ['', '', '', '', ''],
   ['', '', '', '', '']
 ]
+let currentRow = 0
+let currentTile = 0
 
 startGame()
 
@@ -89,7 +93,8 @@ function handleClick(e) {
     deleteKey()
     return
   }
-  pressKey(e.target.key)
+  console.log("e", e)
+  addLetter(e.target.textContent)
 }
 
 function handleKeyPress(e) {
@@ -103,7 +108,7 @@ function handleKeyPress(e) {
     return
   }
   if (e.key.match(/^[a-z]$/)) {
-    pressKey(e.key)
+    addLetter(e.key)
     return
   }
 }
@@ -118,6 +123,17 @@ function deleteKey() {
   return
 }
 
-function pressKey() {
+function addLetter(letter) {
+  const tile = document.getElementById('guessRow-' + currentRow + '-tile-' + currentTile)
+  tile.textContent = letter.toLowerCase()
+  guessRows[currentRow][currentTile]
+  tile.setAttribute('data', letter)
 
+  // if (currentTile >= TILE_LENGTH) {
+  //   currentRow++
+  //   currentTile = 0
+  //   return
+  // }
+  // check if
+  currentTile++
 }
