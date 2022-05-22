@@ -1,5 +1,7 @@
 const tileDisplay = document.querySelector('.tile-container')
 const keyboard = document.querySelector('.keyboard-container')
+const messageDisplay = document.querySelector('.message-container')
+
 const wordle = 'super'
 const TILE_LENGTH = 5
 const ROW_LENGTH = 6
@@ -99,7 +101,6 @@ function handleClick(e) {
 }
 
 function handleKeyPress(e) {
-  console.log('key:', e.key)
   if (e.key === 'Enter') {
     submitGuess()
     return
@@ -115,8 +116,39 @@ function handleKeyPress(e) {
 }
 
 function submitGuess() {
-  console.log('enter')
-  return
+  if (currentTile <= (TILE_LENGTH - 1)) {
+    showMessage('not long enough')
+    currentRow++
+    currentTile = 0
+    return
+  }
+  const guess = guessRows[currentRow].join('')
+  // if (!dictionary.includes(guess)) {
+  //   showMessage("Not in word list")
+  // currentRow++
+  //   currentTile = 0
+  //   return
+  // }
+  checkGuess(guess)
+}
+
+function checkGuess(guess) {
+  flipTile()
+  if (wordle === guess) {
+    showMessage('Magnificent')
+    stopGame()
+    return
+  }
+
+  if (currentRow >= (ROW_LENGTH - 1)) {
+    showMessage('Game over, word is: ', wordle)
+    stopGame()
+    return
+  }
+  if (wordle != guess && currentRow < (ROW_LENGTH - 1)) {
+    currentRow++
+    currentTile = 0
+  }
 }
 
 function deleteLetter() {
@@ -130,11 +162,26 @@ function deleteLetter() {
 }
 
 function addLetter(letter) {
-  if (currentTile < TILE_LENGTH && currentRow < ROW_LENGTH) {
+  if (currentTile < 5 && currentRow < 6) {
     const tile = document.getElementById('guessRow-' + currentRow + '-tile-' + currentTile)
     tile.textContent = letter.toLowerCase()
-    guessRows[currentRow][currentTile] = letter
-    tile.setAttribute('data', letter)
+    guessRows[currentRow][currentTile] = letter.toLowerCase()
+    tile.setAttribute('data', letter.toLowerCase())
     currentTile++
   }
+}
+
+function showMessage(message) {
+  const messageElement = document.createElement('p')
+  messageElement.textContent = message
+  messageDisplay.append(messageElement)
+  setTimeout(() => messageDisplay.removeChild(messageElement), 2000)
+}
+
+function flipTile() {
+
+}
+
+function addColorToKey () {
+
 }
