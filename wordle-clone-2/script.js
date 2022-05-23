@@ -15411,17 +15411,13 @@ function handleKeyPress(e) {
 function submitGuess() {
   if (currentTile <= (TILE_LENGTH - 1)) {
     showMessage('not long enough')
-    currentRow++
-    currentTile = 0
     return
   }
   const guess = guessRows[currentRow].join('')
-  // if (!dictionary.includes(guess)) {
-  //   showMessage("Not in word list")
-  // currentRow++
-  //   currentTile = 0
-  //   return
-  // }
+  if (!dictionary.includes(guess)) {
+    showMessage("Not in word list")
+    return
+  }
   checkGuess(guess)
 }
 
