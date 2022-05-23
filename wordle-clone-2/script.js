@@ -15291,11 +15291,15 @@ const dictionary = [
   "shave"
 ]
 
+// Retrieve word of the day 
+const offsetFromDate = new Date(2022, 4, 22)
+const msOffset = Date.now() - offsetFromDate
+const dayOffset = msOffset / 1000 / 60 / 60 / 24
+const wordle = targetWords[Math.floor(dayOffset)]
+console.log(wordle)
 const tileDisplay = document.querySelector('.tile-container')
 const keyboard = document.querySelector('.keyboard-container')
 const messageDisplay = document.querySelector('.message-container')
-
-const wordle = 'super'
 const TILE_LENGTH = 5
 const ROW_LENGTH = 6
 
@@ -15435,7 +15439,6 @@ function checkGuess(guess) {
     return
   }
   if (wordle != guess && currentRow < (ROW_LENGTH - 1)) {
-    showMessage('Incorrect')
     currentRow++
     currentTile = 0
   }
