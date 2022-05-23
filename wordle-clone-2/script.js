@@ -68,7 +68,7 @@ function buildKeyboard() {
   keys.forEach(key => {
     const buttonElement = document.createElement('button')
     buttonElement.textContent = key
-    buttonElement.setAttribute('id', key)
+    buttonElement.setAttribute('id', key.toLowerCase())
     buttonElement.addEventListener('click', handleClick)
     keyboard.append(buttonElement)
   })
@@ -146,6 +146,7 @@ function checkGuess(guess) {
     return
   }
   if (wordle != guess && currentRow < (ROW_LENGTH - 1)) {
+    showMessage('Incorrect')
     currentRow++
     currentTile = 0
   }
@@ -179,9 +180,37 @@ function showMessage(message) {
 }
 
 function flipTile() {
+  const rowTiles = document.querySelector('#guessRow-' + currentRow).childNodes
+  let checkWordle = wordle
+  guess = []
 
+  rowTiles.forEach(tile => {
+    guess.push({letter: tile.getAttribute('data'), color: 'grey-overlay'})
+  })
+
+  guess.forEach((guess, index) => {
+    if (guess.letter == wordle[index]) {
+      guess.color = 'green-overlay'
+      checkWordle = checkWordle.replace(guess.letter, '')
+    }
+  })
+
+  guess.forEach(guess => {
+    if (checkWordle.includes(guess.letter)){
+      guess.color = 'yellow-overlay'
+      checkWordle = checkWordle.replace(guess.letter, '')
+    }
+  })
+
+  rowTiles.forEach((tile, index) => {
+    setTimeout(() => {
+      tile.classList.add(guess[index].color)
+      addColorToKey(guess[index].letter, guess[index].color)
+    }, 500 * index)
+  })
 }
 
-function addColorToKey () {
-
+function addColorToKey(keyLetter, color) {
+  const key = document.getElementById(keyLetter)
+  key.classList.add(color)
 }
