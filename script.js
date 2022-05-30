@@ -15442,7 +15442,7 @@ function checkGuess(guess) {
   }
 
   if (currentRow >= (ROW_LENGTH - 1)) {
-    showMessage('Game over, word is: ', wordle)
+    showMessage('Game over, word is: ' + wordle)
     stopGame()
     return
   }
