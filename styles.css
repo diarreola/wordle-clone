@@ -67,8 +67,8 @@ body {
   user-select: none;
 }
 
-.keyboard-container button:nth-child(20),
-.keyboard-container button:nth-child(28) {
+.keyboard-container button:nth-child(22),
+.keyboard-container button:nth-child(30) {
   grid-column: span 3;
 }
 

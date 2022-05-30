@@ -15314,6 +15314,7 @@ const keys = [
   'I',
   'O',
   'P',
+  '',
   'A',
   'S',
   'D',
@@ -15323,6 +15324,7 @@ const keys = [
   'J',
   'K',
   'L',
+  '',
   'ENTER',
   'Z',
   'X',
@@ -15363,6 +15365,12 @@ function stopGame() {
 
 function buildKeyboard() {
   keys.forEach(key => {
+    if (key === '') {
+      const divElement = document.createElement('div')
+      divElement.setAttribute('id', 'space')
+      keyboard.append(divElement)
+      return
+    }
     const buttonElement = document.createElement('button')
     buttonElement.textContent = key
     buttonElement.setAttribute('id', key.toLowerCase())
