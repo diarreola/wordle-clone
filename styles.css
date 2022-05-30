@@ -28,8 +28,13 @@ body {
 }
 
 .tile-container {
-  width: 330px;
-  margin-bottom: 30px;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  flex-grow: 1;
+  color: white;
+  margin-bottom: 1em;
+  user-select: none;
 }
 
 .keyboard-container {
