@@ -15496,6 +15496,7 @@ function flipTile() {
 
   rowTiles.forEach((tile, index) => {
     setTimeout(() => {
+      tile.classList.add('flip')
       tile.classList.add(guess[index].color)
       addColorToKey(guess[index].letter, guess[index].color)
     }, 500 * index)
