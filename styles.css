@@ -34,6 +34,7 @@ body {
   flex-grow: 1;
   color: white;
   margin-bottom: 1em;
+  margin-top: 1em;
   user-select: none;
 }
 
@@ -78,9 +79,9 @@ body {
 }
 
 .tile-container .tile {
-  width: 62px;
-  height: 62px;
-  border: 2px solid#3a3a3c;
+  width: 4em;
+  height: 4em;
+  border: .05em solid#3a3a3c;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
@@ -89,14 +90,23 @@ body {
 }
 
 .message-container {
-  height: 30px;
+  position: fixed;
+  top: 10vh;
+  left: 50vw;
+  transform: translateX(-50%);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .message-container p {
+  pointer-events: none;
   background-color: #818384;
-  border-radius: 10px;
-  padding: 10px;
-  margin: 0;
+  border-radius: 2em;
+  padding: 1em;
+  margin: .5em;
+  margin-bottom: .5em;
 }
 
 .tile.flip {
