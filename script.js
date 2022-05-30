@@ -15296,7 +15296,7 @@ const offsetFromDate = new Date(2022, 4, 22)
 const msOffset = Date.now() - offsetFromDate
 const dayOffset = msOffset / 1000 / 60 / 60 / 24
 const wordle = targetWords[Math.floor(dayOffset)]
-console.log(wordle)
+
 const tileDisplay = document.querySelector('.tile-container')
 const keyboard = document.querySelector('.keyboard-container')
 const messageDisplay = document.querySelector('.message-container')
