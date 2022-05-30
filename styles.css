@@ -23,8 +23,9 @@ body {
 
 .title-container {
   text-align: center;
-  width: 510px;
-  border-bottom: solid 1px #3a3a3c;
+  width: 18em;
+  border-bottom: solid 0.1em #3a3a3c;
+  color: white
 }
 
 .tile-container {
@@ -86,7 +87,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 2px;
+  margin: .2em;
 }
 
 .message-container {
