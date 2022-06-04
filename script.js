@@ -15347,11 +15347,27 @@ const guessRows = [
 let currentRow = 0
 let currentTile = 0
 
-startGame()
+checkLocalStorage()
+
+function checkLocalStorage() {
+  const datePlayed = new Date();
+  const wordleData = JSON.parse(localStorage.getItem(datePlayed.toDateString()))
+
+  if (wordleData != null) {
+    buildKeyboard()
+    buildTiles()
+    showMessage('local storage, wordle is ' + wordleData['wordle'] + 'amount of guessses: ' + wordleData['guesses'])
+    stopGame()
+    return
+  }
+
+  startGame()
+}
 
 function startGame () {
   buildKeyboard()
   buildTiles()
+  checkLocalStorage()
   document.addEventListener('keydown', handleKeyPress)
 }
 
@@ -15438,12 +15454,14 @@ function checkGuess(guess) {
   if (wordle === guess) {
     showMessage('Magnificent')
     stopGame()
+    addToLocalStorage(currentRow + 1)
     return
   }
 
   if (currentRow >= (ROW_LENGTH - 1)) {
     showMessage('Game over, word is: ' + wordle)
     stopGame()
+    addToLocalStorage(currentRow + 1)
     return
   }
   if (wordle != guess && currentRow < (ROW_LENGTH - 1)) {
@@ -15514,4 +15532,10 @@ function flipTile() {
 function addColorToKey(keyLetter, color) {
   const key = document.getElementById(keyLetter)
   key.classList.add(color)
+}
+
+function addToLocalStorage(numGuesses) {
+  const datePlayed = new Date();
+  const gameData = {'guesses': numGuesses, 'wordle': wordle}
+  localStorage.setItem(datePlayed.toDateString(), JSON.stringify(gameData))
 }
