@@ -15356,7 +15356,7 @@ function checkLocalStorage() {
   if (wordleData != null) {
     buildKeyboard()
     buildTiles()
-    showMessage('local storage, wordle is ' + wordleData['wordle'] + 'amount of guessses: ' + wordleData['guesses'])
+    showMessage('local storage, wordle is ' + wordleData['wordle'] + ' amount of guessses: ' + wordleData['guesses'])
     stopGame()
     return
   }
@@ -15367,7 +15367,6 @@ function checkLocalStorage() {
 function startGame () {
   buildKeyboard()
   buildTiles()
-  checkLocalStorage()
   document.addEventListener('keydown', handleKeyPress)
 }
 
