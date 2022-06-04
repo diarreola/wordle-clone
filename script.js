@@ -15300,6 +15300,13 @@ const wordle = targetWords[Math.floor(dayOffset)]
 const tileDisplay = document.querySelector('.tile-container')
 const keyboard = document.querySelector('.keyboard-container')
 const messageDisplay = document.querySelector('.message-container')
+const modalContent = document.querySelector(".modal-content");
+// Modal
+const modal = document.querySelector(".modal-overlay");
+const closeBtn = document.querySelector(".close-btn");
+closeBtn.addEventListener("click", function () {
+  modal.classList.remove("open-modal");
+});
 const TILE_LENGTH = 5
 const ROW_LENGTH = 6
 
@@ -15356,7 +15363,7 @@ function checkLocalStorage() {
   if (wordleData != null) {
     buildKeyboard()
     buildTiles()
-    showMessage('local storage, wordle is ' + wordleData['wordle'] + ' amount of guessses: ' + wordleData['guesses'])
+    addModalContent(wordleData)
     stopGame()
     return
   }
@@ -15537,4 +15544,10 @@ function addToLocalStorage(numGuesses) {
   const datePlayed = new Date();
   const gameData = {'guesses': numGuesses, 'wordle': wordle}
   localStorage.setItem(datePlayed.toDateString(), JSON.stringify(gameData))
+}
+
+function addModalContent(currentDayData) {
+  modal.classList.add("open-modal");
+  modalContent.textContent = 'You already played! Wait until tomorrow. Wordle is: ' + currentDayData['wordle']
+  modalContent.textContent += ', Stats: Amount of guessses-' + currentDayData['guesses']
 }

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>wordle clone</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
   </head>
   <body>
     <div class="game-container">
@@ -15,6 +16,15 @@
       <div class="message-container"></div>
       <div class="tile-container"></div>
       <div class="keyboard-container"></div>
+    </div>
+    <!-- modal -->
+    <div class="modal-overlay">
+      <div class="modal-container">
+        <div class="modal-content"></div>
+        <button class="close-btn">
+          <i class="bi bi-x-square"></i>
+        </button>
+      </div>
     </div>
     <script src="script.js"></script>
   </body>
